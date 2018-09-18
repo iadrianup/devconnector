@@ -17,10 +17,14 @@ app.use(bodyParser.json());
 const db = require('./config/keys').mongoURI;
 
 // Conectar a MongoDB utilizando mongoose
+mongoose.set('useFindAndModify', false);
 mongoose
-	.connect(db)
-	.then(() => console.log('Conectado a MongoDB'))
-	.catch(err => console.log(err));
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log('Conectado a MongoDB'))
+  .catch(err => console.log(err));
 
 // Middleware de Passport
 app.use(passport.initialize());
